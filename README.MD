@@ -1,0 +1,3 @@
+# Understanding BloC pattern through a login
+
+This project helps me understanding an optimal way of using the BloC pattern. I have found a lot of different ways to implement it. It has confused me quite a lot... 
