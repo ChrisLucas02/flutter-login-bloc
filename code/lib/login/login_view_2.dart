@@ -1,15 +1,16 @@
-import 'package:code/login/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+import 'bloc-possibility-2/login_bloc.dart';
+
+class LoginView2 extends StatefulWidget {
+  const LoginView2({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<LoginView2> createState() => _LoginView2State();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _LoginView2State extends State<LoginView2> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -22,12 +23,12 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginBloc, LoginState>(listener: (context, state) {
-      if (state.isAuthenticated) {
+    return BlocConsumer<LoginBloc2, LoginState>(listener: (context, state) {
+      if (state.status == LoginStatus.authenticated) {
         print("Well done!");
-      } else if (state.errorMessage.isNotEmpty) {
+      } else if (state.status == LoginStatus.error) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(state.errorMessage)),
+          SnackBar(content: Text(state.error)),
         );
       }
       _passwordController.clear();
@@ -51,14 +52,14 @@ class _LoginViewState extends State<LoginView> {
             ElevatedButton(
               onPressed: () {
                 // Dispatch LoginRequested event with entered credentials
-                context.read<LoginBloc>().add(
+                context.read<LoginBloc2>().add(
                       LoginRequested(
                         username: _usernameController.text,
                         password: _passwordController.text,
                       ),
                     );
               },
-              child: state.isLoading
+              child: state.status == LoginStatus.loading
                   ? const CircularProgressIndicator()
                   : const Text('Login'),
             ),
