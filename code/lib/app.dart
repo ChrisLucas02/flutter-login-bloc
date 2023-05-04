@@ -1,6 +1,5 @@
-import 'package:code/login/bloc-possibility-2/login_bloc.dart';
-import 'package:code/login/login_view_1.dart';
-import 'package:code/login/login_view_2.dart';
+import 'package:code/login/bloc-possibility-3/login_bloc.dart';
+import 'package:code/login/login_view_3.dart';
 import 'package:code/login_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,11 +22,12 @@ class FlutterLoginApp extends StatelessWidget {
           centerTitle: true,
         ),
         body: BlocProvider(
-          create: (context) => LoginBloc2(
+          create: (context) => LoginBloc3(
             repository: context.read<LoginRepository>(),
           ),
           //child: const LoginView1(),
-          child: const LoginView2(),
+          //child: const LoginView2(),
+          child: const LoginView3(),
         ),
       ),
     );
